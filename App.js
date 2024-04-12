@@ -41,7 +41,7 @@ const App = () => {
     <>
       <NavigationContainer>
         {hideSplashScreen ? (
-          <Stack.Navigator initialRouteName="ReportarSituacionScreen" screenOptions={{ headerShown: false }}>
+          <Stack.Navigator initialRouteName="VideosScreen" screenOptions={{ headerShown: false }}>
             <Stack.Screen
               name="LogInScreen"
               component={LogInScreen}
