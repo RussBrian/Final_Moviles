@@ -1,4 +1,4 @@
-const Stack = createNativeStackNavigator();
+
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { useFonts } from "expo-font";
@@ -23,9 +23,9 @@ import VideosScreen from "./screens/VideosScreen";
 import AlberguesScreen from "./screens/AlberguesScreen";
 import MedidasScreen from "./screens/MedidasScreen";
 
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
-
+const drawer = createDrawerNavigator();
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
 
@@ -41,108 +41,108 @@ const App = () => {
     <>
       <NavigationContainer>
         {hideSplashScreen ? (
-          <Stack.Navigator initialRouteName="VideosScreen" screenOptions={{ headerShown: false }}>
-            <Stack.Screen
+          <drawer.Navigator initialRouteName="ServiciosGeneralScreen">
+            <drawer.Screen
               name="LogInScreen"
               component={LogInScreen}
-              options={{ headerShown: false }}
+              
             />
-            <Stack.Screen
+            <drawer.Screen
               name="CreateNewAccountScreen"
               component={CreateNewAccountScreen}
-              options={{ headerShown: false }}
+              
             />
-            <Stack.Screen
+            <drawer.Screen
               name="InicioMenuScreen"
               component={InicioMenuScreen}
-              options={{ headerShown: false }}
+              
             />
-            <Stack.Screen
+            <drawer.Screen
               name="NoticiasEspecificasScreen"
               component={NoticiasEspecificasScreen}
-              options={{ headerShown: false }}
+              
             />
-            <Stack.Screen
+            <drawer.Screen
               name="ReportarSituacionScreen"
               component={ReportarSituacionScreen}
-              options={{ headerShown: false }}
+              
             />
-            <Stack.Screen
+            <drawer.Screen
               name="MisSituacionesGeneralScreen"
               component={MisSituacionesGeneralScreen}
-              options={{ headerShown: false }}
+             
             />
-            <Stack.Screen
+            <drawer.Screen
               name="MapaDeSituacionesScreen"
               component={MapaDeSituacionesScreen}
-              options={{ headerShown: false }}
+           
             />
-            <Stack.Screen
+            <drawer.Screen
               name="MisSituacionesDisplayScreen"
               component={MisSituacionesDisplayScreen}
-              options={{ headerShown: false }}
+              
             />
-            <Stack.Screen
+            <drawer.Screen
               name="CambiarContraseaScreen"
               component={CambiarContraseaScreen}
-              options={{ headerShown: false }}
+              
             />
-            <Stack.Screen
+            <drawer.Screen
               name="CerrarSesinScreen"
               component={CerrarSesinScreen}
-              options={{ headerShown: false }}
+             
             />
-            <Stack.Screen
+            <drawer.Screen
               name="InicioScreen"
               component={InicioScreen}
-              options={{ headerShown: false }}
+              
             />
-            <Stack.Screen
+            <drawer.Screen
               name="HistoriaScreen"
               component={HistoriaScreen}
-              options={{ headerShown: false }}
+              
             />
-            <Stack.Screen
+            <drawer.Screen
               name="ServiciosGeneralScreen"
               component={ServiciosGeneralScreen}
-              options={{ headerShown: false }}
+              
             />
-            <Stack.Screen
+            <drawer.Screen
               name="ServiciosDisplayScreen"
               component={ServiciosDisplayScreen}
-              options={{ headerShown: false }}
+              
             />
-            <Stack.Screen
+            <drawer.Screen
               name="MiembrosScreen"
               component={MiembrosScreen}
-              options={{ headerShown: false }}
+              
             />
-            <Stack.Screen
+            <drawer.Screen
               name="MiembrosScreen1"
               component={MiembrosScreen1}
-              options={{ headerShown: false }}
+             
             />
-            <Stack.Screen
+            <drawer.Screen
               name="MiembrosScreen2"
               component={MiembrosScreen2}
-              options={{ headerShown: false }}
+              
             />
-            <Stack.Screen
+            <drawer.Screen
               name="VideosScreen"
               component={VideosScreen}
-              options={{ headerShown: false }}
+              
             />
-            <Stack.Screen
+            <drawer.Screen
               name="AlberguesScreen"
               component={AlberguesScreen}
-              options={{ headerShown: false }}
+              
             />
-            <Stack.Screen
+            <drawer.Screen
               name="MedidasScreen"
               component={MedidasScreen}
-              options={{ headerShown: false }}
+              
             />
-          </Stack.Navigator>
+          </drawer.Navigator>
         ) : null}
       </NavigationContainer>
     </>
