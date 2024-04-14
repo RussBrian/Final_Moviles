@@ -15,7 +15,7 @@ import CerrarSesinScreen from "./screens/CerrarSesinScreen";
 import InicioScreen from "./screens/InicioScreen";
 import HistoriaScreen from "./screens/HistoriaScreen";
 import ServiciosGeneralScreen from "./screens/ServiciosGeneralScreen";
-import ServiciosDisplayScreen from "./screens/ServiciosDisplayScreen";
+import NoticiasGeneralScreen from "./screens/NoticiasGeneralScreen";
 import MiembrosScreen from "./screens/MiembrosScreen";
 import MiembrosScreen1 from "./screens/MiembrosScreen1";
 import MiembrosScreen2 from "./screens/MiembrosScreen2";
@@ -109,7 +109,7 @@ const App = () => {
             />
             <drawer.Screen
               name="ServiciosDisplayScreen"
-              component={ServiciosDisplayScreen}
+              component={NoticiasGeneralScreen}
               
             />
             <drawer.Screen
