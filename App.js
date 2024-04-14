@@ -22,9 +22,9 @@ import MiembrosScreen2 from "./screens/MiembrosScreen2";
 import VideosScreen from "./screens/VideosScreen";
 import AlberguesScreen from "./screens/AlberguesScreen";
 import MedidasScreen from "./screens/MedidasScreen";
+import RegistroMiembroScreen from "./screens/RegistroMiembroScreen";
 
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { View, Text, Pressable, TouchableOpacity } from "react-native";
 const drawer = createDrawerNavigator();
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
@@ -63,6 +63,11 @@ const App = () => {
               
             />
             <drawer.Screen
+              name="RegistroMiembroScreen"
+              component={RegistroMiembroScreen}
+              
+            />
+              <drawer.Screen
               name="ReportarSituacionScreen"
               component={ReportarSituacionScreen}
               

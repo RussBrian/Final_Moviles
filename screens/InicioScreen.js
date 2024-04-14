@@ -3,62 +3,58 @@ import {
   View,
   Text,
   TextInput,
-  Image,
-  StyleSheet,
-  Dimensions,
   TouchableOpacity,
+  StyleSheet,
+  Alert,
 } from 'react-native';
 
 const App = () => {
-  const [activeImage, setActiveImage] = useState(0);
-  const images = [
-    { source: require('../assets/icon.png') },
-    { source: require('../assets/icon.png') },
-    { source: require('../assets/icon.png') },
-  ];
+  const [cedula, setCedula] = useState('');
+  const [clave, setClave] = useState('');
 
-  const handleImageChange = (direction) => {
-    if (direction === 'left') {
-      setActiveImage(prevActiveImage => (prevActiveImage === 0 ? images.length - 1 : prevActiveImage - 1));
-    } else if (direction === 'right') {
-      setActiveImage(prevActiveImage => (prevActiveImage === images.length - 1 ? 0 : prevActiveImage + 1));
+  const iniciarSesion = async () => {
+    const formData = new FormData();
+    formData.append('cedula', cedula);
+    formData.append('clave', clave);
+
+    try {
+      const response = await fetch('https://adamix.net/defensa_civil/def/iniciar_sesion.php', {
+        method: 'POST',
+        body: formData,
+      });
+      const json = await response.json();
+      if (json.exito) {
+        // Si el inicio de sesión es exitoso, maneja el caso de éxito aquí
+        Alert.alert("Éxito", "Inicio de sesión exitoso!");
+      } else {
+        // Si hay un fallo en el inicio de sesión, maneja el error aquí
+        Alert.alert("Error", json.mensaje);
+      }
+    } catch (error) {
+      console.error('Error al iniciar sesión:', error);
+      Alert.alert("Error", "Error al intentar conectar con el servidor");
     }
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.searchBar}>
-        <TextInput placeholder="Buscar" style={styles.searchInput} />
-        <TouchableOpacity onPress={() => {}}>
-          <Image source={require('../assets/icon.png')} style={styles.searchIcon} />
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.carousel}>
-        <Image source={images[activeImage].source} style={styles.carouselImage} />
-
-        <TouchableOpacity style={styles.carouselArrowLeft} onPress={() => handleImageChange('left')}>
-          <Image source={require('../assets/icon.png')} style={styles.carouselArrowIcon} />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.carouselArrowRight} onPress={() => handleImageChange('right')}>
-          <Image source={require('../assets/icon.png')} style={styles.carouselArrowIcon} />
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.actionBar}>
-        <TouchableOpacity style={styles.actionButton}>
-          <Text style={styles.actionButtonText}>Inicio</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.actionButton}>
-          <Text style={styles.actionButtonText}>Configuración</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.actionButton}>
-          <Text style={styles.actionButtonText}>Ayuda</Text>
-        </TouchableOpacity>
-      </View>
+      <TextInput
+        placeholder="Cédula"
+        value={cedula}
+        onChangeText={setCedula}
+        style={styles.input}
+        keyboardType="numeric"
+      />
+      <TextInput
+        placeholder="Clave"
+        value={clave}
+        onChangeText={setClave}
+        style={styles.input}
+        secureTextEntry
+      />
+      <TouchableOpacity onPress={iniciarSesion} style={styles.button}>
+        <Text style={styles.buttonText}>Iniciar Sesión</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -66,61 +62,26 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  searchBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    justifyContent: 'center',
     padding: 20,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#fff',
   },
-  searchInput: {
-    flex: 1,
-    height: 40,
+  input: {
+    height: 50,
+    marginBottom: 10,
     borderWidth: 1,
     borderColor: '#ccc',
     padding: 10,
   },
-  searchIcon: {
-    width: 20,
-    height: 20,
-  },
-  carousel: {
+  button: {
+    backgroundColor: '#007bff',
+    padding: 15,
     alignItems: 'center',
-    justifyContent: 'center',
-    height: 300,
+    borderRadius: 5,
   },
-  carouselImage: {
-    width: Dimensions.get('window').width,
-    height: '100%',
-  },
-  carouselArrowLeft: {
-    position: 'absolute',
-    left: 20,
-    top: '50%',
-    transform: [{ translateY: -50 }],
-  },
-  carouselArrowRight: {
-    position: 'absolute',
-    right: 20,
-    top: '50%',
-    transform: [{ translateY: -50 }],
-  },
-  carouselArrowIcon: {
-    width: 30,
-    height: 30,
-  },
-  actionBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 20,
-    backgroundColor: '#f0f0f0',
-  },
-  actionButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  actionButtonText: {
-    fontSize: 16,
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
   },
 });
 

@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import insertUsuario from '../db/insert';
 
 const CreateAccountScreen = () => {
   const navigation = useNavigation();
+  const [nombre, setNombre] = useState('');
+  const [correo, setCorreo] = useState('');
+  const [clave, setClave] = useState('');
+
+  const handleSave = async () => {
+    // Aquí deberías añadir las validaciones o manejo de errores según sea necesario
+    await insertUsuario(nombre, correo, clave);
+    // Redirigir al inicio de sesión después de guardar exitosamente
+    navigation.navigate('LogInScreen');
+  };
 
   return (
     <View style={styles.container}>
@@ -17,6 +28,8 @@ const CreateAccountScreen = () => {
         style={styles.input}
         placeholder="Nombre"
         autoCapitalize="words"
+        value={nombre}
+        onChangeText={setNombre}
       />
       <TextInput
         style={styles.input}
@@ -24,22 +37,22 @@ const CreateAccountScreen = () => {
         keyboardType="email-address"
         autoCapitalize="none"
         autoCorrect={false}
+        value={correo}
+        onChangeText={setCorreo}
       />
       <TextInput
         style={styles.input}
         placeholder="Contraseña"
         secureTextEntry={true}
+        value={clave}
+        onChangeText={setClave}
       />
-      <Button title="Guardar" style={styles.saveButton} onPress={() => {
-  // Implementar la lógica para guardar la información del usuario
-  // ...
+      <Button title="Guardar" style={styles.saveButton} onPress={handleSave} />
 
-  // Redirigir al inicio de sesión después de guardar exitosamente
-  navigation.navigate('LoginScreen');
-}} />
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
