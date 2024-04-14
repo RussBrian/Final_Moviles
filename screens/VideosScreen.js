@@ -1,28 +1,42 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { WebView } from 'react-native-webview';
 
 const VideosScreen = () => {
-    const videos = [
-        { id: '1', videoId: 'bnOD-oNkO48' },
-        { id: '2', videoId: 'bnOD-oNkO48' },
-        { id: '3', videoId: 'bnOD-oNkO48' },
-        { id: '4', videoId: 'bnOD-oNkO48' },
-        { id: '5', videoId: 'bnOD-oNkO48' }
-    ];
+    const [videos, setVideos] = useState([]);
+
+    useEffect(() => {
+        fetchVideos();
+    }, []);
+
+    const fetchVideos = async () => {
+        try {
+            const response = await fetch("https://adamix.net/defensa_civil/def/videos.php");
+            const json = await response.json();
+            if (json.exito) {
+                setVideos(json.datos);
+            } else {
+                console.error("Error fetching videos:", json.mensaje);
+            }
+        } catch (error) {
+            console.error("Error fetching videos:", error);
+        }
+    };
 
     return (
         <View style={styles.container}>
-           <ScrollView style={styles.scrollView}>
-           {videos.map(video => (
-                <View key={video.id} style={styles.youtube}>
-                    <YouTubeVideo videoId={video.videoId} />
-                </View>
-            ))}
-           </ScrollView> 
+            <ScrollView style={styles.scrollView}>
+                {videos.map(video => (
+                    <View key={video.id} style={styles.videoContainer}>
+                        <Text style={styles.videoTitle}>{video.titulo}</Text>
+                        <Text style={styles.videoDescription}>{video.descripcion}</Text>
+                        <YouTubeVideo videoId={video.link} />
+                    </View>
+                ))}
+            </ScrollView>
         </View>
     );
-}
+};
 
 const YouTubeVideo = ({ videoId }) => {
     const videoUrl = `https://www.youtube.com/embed/${videoId}`;
@@ -42,17 +56,24 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         marginTop: '10%',
-        marginLeft:'5%'        
-       
+        marginLeft: '5%'
     },
-    youtube: {
+    videoContainer: {
         width: '90%',
-        height: 200,
         marginBottom: 20
     },
+    videoTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 5
+    },
+    videoDescription: {
+        fontSize: 16,
+        marginBottom: 10
+    },
     scrollView: {
-      flex: 1,
-      width: "100%"
+        flex: 1,
+        width: "100%"
     }
 });
 
