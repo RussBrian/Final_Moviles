@@ -23,7 +23,7 @@ import VideosScreen from "./screens/VideosScreen";
 import AlberguesScreen from "./screens/AlberguesScreen";
 import MedidasScreen from "./screens/MedidasScreen";
 import RegistroMiembroScreen from "./screens/RegistroMiembroScreen";
-
+import MapaAlberguesScreen from "./screens/MapaAlberguesScreen";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 const drawer = createDrawerNavigator();
 const App = () => {
@@ -140,6 +140,11 @@ const App = () => {
             <drawer.Screen
               name="AlberguesScreen"
               component={AlberguesScreen}
+              
+            />
+            <drawer.Screen
+              name="MapaAlberguesScreen"
+              component={MapaAlberguesScreen}
               
             />
             <drawer.Screen
