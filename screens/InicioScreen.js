@@ -8,6 +8,7 @@ import {
   Alert,
 } from 'react-native';
 
+
 const App = () => {
   const [cedula, setCedula] = useState('');
   const [clave, setClave] = useState('');
@@ -24,10 +25,8 @@ const App = () => {
       });
       const json = await response.json();
       if (json.exito) {
-        // Si el inicio de sesión es exitoso, maneja el caso de éxito aquí
         Alert.alert("Éxito", "Inicio de sesión exitoso!");
       } else {
-        // Si hay un fallo en el inicio de sesión, maneja el error aquí
         Alert.alert("Error", json.mensaje);
       }
     } catch (error) {

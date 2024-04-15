@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
 import { Snackbar } from 'react-native-paper';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const RegistroMiembro = () => {
+const RegistroMiembroScreen = () => {
   const [cedula, setCedula] = useState('');
   const [nombre, setNombre] = useState('');
   const [apellido, setApellido] = useState('');
@@ -29,18 +30,25 @@ const RegistroMiembro = () => {
         data: formData,
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      
-      setSnackbarMensaje('Registro exitoso');
+      const json = response.data;
+      if (json.exito) {
+        console.log('Token del usuario:', json.datos.token); // Imprime el token en la consola
+        await AsyncStorage.setItem('userToken', json.datos.token);
+        setSnackbarMensaje('Registro exitoso. Bienvenido!');
+      } else {
+        setSnackbarMensaje(json.mensaje || 'Error en el registro');
+      }
+    } catch (error) {
+      setSnackbarMensaje('Error al registrar: ' + error.message);
+    } finally {
+      setSnackbarVisible(true);
+      // Limpia los campos del formulario
       setCedula('');
       setNombre('');
       setApellido('');
       setClave('');
       setCorreo('');
       setTelefono('');
-    } catch (error) {
-      setSnackbarMensaje('Error al registrar: ' + error.message);
-    } finally {
-      setSnackbarVisible(true);
     }
   };
 
@@ -51,6 +59,7 @@ const RegistroMiembro = () => {
         placeholder="Cédula"
         value={cedula}
         onChangeText={setCedula}
+        keyboardType="numeric"
       />
       <TextInput
         style={styles.input}
@@ -76,12 +85,14 @@ const RegistroMiembro = () => {
         placeholder="Correo"
         value={correo}
         onChangeText={setCorreo}
+        keyboardType="email-address"
       />
       <TextInput
         style={styles.input}
         placeholder="Teléfono"
         value={telefono}
         onChangeText={setTelefono}
+        keyboardType="phone-pad"
       />
       <Button title="Registrar" onPress={handleSubmit} />
       <Snackbar
@@ -111,4 +122,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RegistroMiembro;
+export default RegistroMiembroScreen;

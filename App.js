@@ -9,7 +9,7 @@ import NoticiasEspecificasScreen from "./screens/NoticiasEspecificasScreen";
 import ReportarSituacionScreen from "./screens/ReportarSituacionScreen";
 import MisSituacionesGeneralScreen from "./screens/MisSituacionesGeneralScreen";
 import MapaDeSituacionesScreen from "./screens/MapaDeSituacionesScreen";
-import MisSituacionesDisplayScreen from "./screens/MisSituacionesDisplayScreen";
+import MapaAlberguesScreen from "./screens/MapaAlberguesScreen";
 import CambiarContraseaScreen from "./screens/CambiarContraseaScreen";
 import CerrarSesinScreen from "./screens/CerrarSesinScreen";
 import InicioScreen from "./screens/InicioScreen";
@@ -17,8 +17,6 @@ import HistoriaScreen from "./screens/HistoriaScreen";
 import ServiciosGeneralScreen from "./screens/ServiciosGeneralScreen";
 import NoticiasGeneralScreen from "./screens/NoticiasGeneralScreen";
 import MiembrosScreen from "./screens/MiembrosScreen";
-import MiembrosScreen1 from "./screens/MiembrosScreen1";
-import MiembrosScreen2 from "./screens/MiembrosScreen2";
 import VideosScreen from "./screens/VideosScreen";
 import AlberguesScreen from "./screens/AlberguesScreen";
 import MedidasScreen from "./screens/MedidasScreen";
@@ -43,110 +41,91 @@ const App = () => {
         {hideSplashScreen ? (
           <drawer.Navigator initialRouteName="ServiciosGeneralScreen">
             <drawer.Screen
-              name="LogInScreen"
-              component={LogInScreen}
-              
-            />
-            <drawer.Screen
-              name="CreateNewAccountScreen"
-              component={CreateNewAccountScreen}
-              
-            />
-            <drawer.Screen
-              name="InicioMenuScreen"
+              name="Inicio"
               component={InicioMenuScreen}
               
             />
             <drawer.Screen
-              name="NoticiasEspecificasScreen"
-              component={NoticiasEspecificasScreen}
-              
-            />
-            <drawer.Screen
-              name="RegistroMiembroScreen"
-              component={RegistroMiembroScreen}
-              
-            />
-              <drawer.Screen
-              name="ReportarSituacionScreen"
-              component={ReportarSituacionScreen}
-              
-            />
-            <drawer.Screen
-              name="MisSituacionesGeneralScreen"
-              component={MisSituacionesGeneralScreen}
-             
-            />
-            <drawer.Screen
-              name="MapaDeSituacionesScreen"
-              component={MapaDeSituacionesScreen}
-           
-            />
-            <drawer.Screen
-              name="MisSituacionesDisplayScreen"
-              component={MisSituacionesDisplayScreen}
-              
-            />
-            <drawer.Screen
-              name="CambiarContraseaScreen"
-              component={CambiarContraseaScreen}
-              
-            />
-            <drawer.Screen
-              name="CerrarSesinScreen"
-              component={CerrarSesinScreen}
-             
-            />
-            <drawer.Screen
-              name="InicioScreen"
-              component={InicioScreen}
-              
-            />
-            <drawer.Screen
-              name="HistoriaScreen"
+              name="Historia"
               component={HistoriaScreen}
               
             />
             <drawer.Screen
-              name="ServiciosGeneralScreen"
+              name="Servicios"
               component={ServiciosGeneralScreen}
               
             />
             <drawer.Screen
-              name="ServiciosDisplayScreen"
+              name="Noticias"
               component={NoticiasGeneralScreen}
               
             />
             <drawer.Screen
-              name="MiembrosScreen"
-              component={MiembrosScreen}
-              
-            />
-            <drawer.Screen
-              name="MiembrosScreen1"
-              component={MiembrosScreen1}
-             
-            />
-            <drawer.Screen
-              name="MiembrosScreen2"
-              component={MiembrosScreen2}
-              
-            />
-            <drawer.Screen
-              name="VideosScreen"
+              name="Videos"
               component={VideosScreen}
               
             />
-            <drawer.Screen
-              name="AlberguesScreen"
+              <drawer.Screen
+              name="Albergues"
               component={AlberguesScreen}
               
             />
             <drawer.Screen
-              name="MedidasScreen"
+              name="Mapas de Albergues"
+              component={MapaAlberguesScreen}
+             
+            />
+            <drawer.Screen
+              name="Medidas Preventivas"
               component={MedidasScreen}
+           
+            />
+            <drawer.Screen
+              name="Miembros"
+              component={MiembrosScreen}
               
             />
+            <drawer.Screen
+              name="Quiero ser Voluntario"
+              component={RegistroMiembroScreen}
+              
+            />
+            <drawer.Screen
+              name="Acerca de"
+              component={HistoriaScreen} //Modificar el screen
+             
+            />
+            <drawer.Screen
+              name="Iniciar Sesion"
+              component={InicioScreen}
+              
+            />
+            <drawer.Screen
+              name="Noticias Especificas"
+              component={NoticiasEspecificasScreen}
+              
+            />
+            <drawer.Screen
+              name="Reportar Situacion"
+              component={ReportarSituacionScreen}
+              
+            />
+            <drawer.Screen
+              name="Mis situaciones"
+              component={MisSituacionesGeneralScreen}
+              
+            />
+            <drawer.Screen
+              name="Mapa de situaciones"
+              component={MapaDeSituacionesScreen}
+              
+            />
+            <drawer.Screen
+              name="Cambiar Contraseña"
+              component={CambiarContraseaScreen}
+             
+            />
+            
           </drawer.Navigator>
         ) : null}
       </NavigationContainer>
