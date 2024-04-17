@@ -32,8 +32,7 @@ const RegistroMiembroScreen = () => {
       });
       const json = response.data;
       if (json.exito) {
-        console.log('Token del usuario:', json.datos.token); // Imprime el token en la consola
-        await AsyncStorage.setItem('userToken', json.datos.token);
+        console.log('Registro exitoso');
         setSnackbarMensaje('Registro exitoso. Bienvenido!');
       } else {
         setSnackbarMensaje(json.mensaje || 'Error en el registro');

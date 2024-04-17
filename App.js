@@ -1,9 +1,6 @@
 
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { useFonts } from "expo-font";
-import LogInScreen from "./screens/LogInScreen";
-import CreateNewAccountScreen from "./screens/CreateNewAccountScreen";
 import InicioMenuScreen from "./screens/InicioMenuScreen";
 import NoticiasEspecificasScreen from "./screens/NoticiasEspecificasScreen";
 import ReportarSituacionScreen from "./screens/ReportarSituacionScreen";
@@ -11,7 +8,7 @@ import MisSituacionesGeneralScreen from "./screens/MisSituacionesGeneralScreen";
 import MapaDeSituacionesScreen from "./screens/MapaDeSituacionesScreen";
 import MapaAlberguesScreen from "./screens/MapaAlberguesScreen";
 import CambiarContraseaScreen from "./screens/CambiarContraseaScreen";
-import CerrarSesinScreen from "./screens/CerrarSesinScreen";
+import AcercaDeScreen from "./screens/AcercaDeScreen";
 import InicioScreen from "./screens/InicioScreen";
 import HistoriaScreen from "./screens/HistoriaScreen";
 import ServiciosGeneralScreen from "./screens/ServiciosGeneralScreen";
@@ -21,30 +18,31 @@ import VideosScreen from "./screens/VideosScreen";
 import AlberguesScreen from "./screens/AlberguesScreen";
 import MedidasScreen from "./screens/MedidasScreen";
 import RegistroMiembroScreen from "./screens/RegistroMiembroScreen";
-import MapaAlberguesScreen from "./screens/MapaAlberguesScreen";
+
 import { createDrawerNavigator } from '@react-navigation/drawer';
+
 const drawer = createDrawerNavigator();
 const App = () => {
   const [hideSplashScreen, setHideSplashScreen] = React.useState(true);
 
-  const [fontsLoaded, error] = useFonts({
-    "Manjari-Regular": require("./assets/fonts/Manjari-Regular.ttf"),
-  });
+  // const [fontsLoaded, error] = useFonts({
+  //   "Manjari-Regular": require("./assets/fonts/Manjari-Regular.ttf"),
+  // });
 
-  if (!fontsLoaded && !error) {
-    return null;
-  }
+  // if (!fontsLoaded && !error) {
+  //   return null;
+  // }
 
   return (
     <>
       <NavigationContainer>
         {hideSplashScreen ? (
           <drawer.Navigator initialRouteName="ServiciosGeneralScreen">
-            <drawer.Screen
+            {/* <drawer.Screen
               name="Inicio"
               component={InicioMenuScreen}
               
-            />
+            /> */}
             <drawer.Screen
               name="Historia"
               component={HistoriaScreen}
@@ -71,21 +69,12 @@ const App = () => {
               
             />
             <drawer.Screen
-<<<<<<< HEAD
               name="Mapas de Albergues"
               component={MapaAlberguesScreen}
              
             />
             <drawer.Screen
               name="Medidas Preventivas"
-=======
-              name="MapaAlberguesScreen"
-              component={MapaAlberguesScreen}
-              
-            />
-            <drawer.Screen
-              name="MedidasScreen"
->>>>>>> a53bf7eac803f6ae2e201992096d1aaf2497595b
               component={MedidasScreen}
            
             />
@@ -101,7 +90,7 @@ const App = () => {
             />
             <drawer.Screen
               name="Acerca de"
-              component={HistoriaScreen} //Modificar el screen
+              component={AcercaDeScreen}
              
             />
             <drawer.Screen
@@ -124,11 +113,11 @@ const App = () => {
               component={MisSituacionesGeneralScreen}
               
             />
-            <drawer.Screen
+            {/* <drawer.Screen
               name="Mapa de situaciones"
               component={MapaDeSituacionesScreen}
               
-            />
+            /> */}
             <drawer.Screen
               name="Cambiar Contraseña"
               component={CambiarContraseaScreen}

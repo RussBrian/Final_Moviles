@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Alert,
-} from 'react-native';
-
+import { View, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage'; // Importar AsyncStorage
+import { useNavigation } from '@react-navigation/native'; 
 
 const App = () => {
   const [cedula, setCedula] = useState('');
   const [clave, setClave] = useState('');
+  const navigation = useNavigation();
 
   const iniciarSesion = async () => {
     const formData = new FormData();
@@ -25,7 +20,14 @@ const App = () => {
       });
       const json = await response.json();
       if (json.exito) {
+        const token = json.datos.token; 
+        console.log('Token del usuario:', json.datos.token);
         Alert.alert("Éxito", "Inicio de sesión exitoso!");
+
+        // Almacenar el token en AsyncStorage
+        await AsyncStorage.setItem('userToken', token);
+
+       navigation.navigate('Noticias Especificas', { token: token }); // Pasar el token a NoticiasEspecificasScreen
       } else {
         Alert.alert("Error", json.mensaje);
       }
@@ -51,9 +53,7 @@ const App = () => {
         style={styles.input}
         secureTextEntry
       />
-      <TouchableOpacity onPress={iniciarSesion} style={styles.button}>
-        <Text style={styles.buttonText}>Iniciar Sesión</Text>
-      </TouchableOpacity>
+      <Button title="Iniciar Sesión" onPress={iniciarSesion} />
     </View>
   );
 };
@@ -71,16 +71,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ccc',
     padding: 10,
-  },
-  button: {
-    backgroundColor: '#007bff',
-    padding: 15,
-    alignItems: 'center',
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
   },
 });
 

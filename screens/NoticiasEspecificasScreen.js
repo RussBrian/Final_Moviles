@@ -1,73 +1,53 @@
-import * as React from "react";
-import { StyleSheet, View, Text, ScrollView, ActivityIndicator } from "react-native";
+import React, { useState, useEffect } from 'react';
+import { View, Text } from 'react-native';
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage'; // Importa AsyncStorage aquí
 
-const NoticiasEspecificasScreen = () => {
-  const [noticias, setNoticias] = React.useState(null);
-  const [isLoading, setIsLoading] = React.useState(true);
+const getSpecificNews = async (token) => {
+  try {
+    const uri = 'https://adamix.net/defensa_civil/def/noticias_especificas.php';
+    const requestData = { token };
+    console.log('Sending request with token:', token);
+    const response = await axios.post(uri, requestData);
 
-  React.useEffect(() => {
-    const fetchNoticias = async () => {
-      setIsLoading(true); 
-      try {
-        const token = 'de79b39025bf9d291d13f9faa83dc1de' //await AsyncStorage.getItem('userToken');  Obtiene el token
-        if (token) {
-          const response = await axios({
-            method: 'get',
-            url: 'https://adamix.net/defensa_civil/def/noticias_especificas.php',
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-          setNoticias(response.data.datos);
-        } else {
-          console.log('No hay token disponible');
-        }
-      } catch (error) {
-        console.error('Error fetching noticias:', error);
+    if (response.status === 200) {
+      const responseData = response.data;
+      console.log('Response data:', responseData);
+      if (responseData.exito === true) {
+        return responseData.datos;
       }
-      setIsLoading(false);
-    };
-  
-    fetchNoticias();
-  }, []);
-
-  if (isLoading) {
-    return <ActivityIndicator size="large" />;
+    }
+    return null;
+  } catch (error) {
+    console.error('Error fetching specific news:', error);
+    return null;
   }
-
-  if (!noticias) {
-    return <Text>No hay noticias disponibles</Text>;
-  }
-
-  return (
-    <ScrollView style={styles.noticiasEspecificasScreen}>
-      {noticias.map((noticia, index) => (
-        <View key={index} style={styles.noticiaContainer}>
-          <Text style={styles.titulo}>{noticia.titulo}</Text>
-          <Text>{noticia.descripcion}</Text>
-        </View>
-      ))}
-    </ScrollView>
-  );
 };
 
-const styles = StyleSheet.create({
-  noticiasEspecificasScreen: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  noticiaContainer: {
-    padding: 20,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-  },
-  titulo: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  // ... otros estilos que necesites
-});
+const NoticiasEspecificasScreen = ({ route }) => {
+  const token = route.params.token;
+  const [specificNews, setSpecificNews] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (token) {
+        const news = await getSpecificNews(token);
+        console.log('Received specific news:', news);
+        setSpecificNews(news); // Corregir aquí, estabalecer el estado specificNews con el valor de las noticias
+      }
+    };
+    fetchData();
+  }, [token]);
+
+  return (
+    <View>
+      <Text>Specific News:</Text>
+      {specificNews ? (
+        <Text>{specificNews}</Text> // Corregir aquí, usar specificNews en lugar de getSpecificNews
+      ) : (
+        <Text>No specific news available</Text>
+      )}
+    </View>
+  );
+};
 
 export default NoticiasEspecificasScreen;
