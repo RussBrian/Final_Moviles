@@ -38,11 +38,11 @@ const App = () => {
       <NavigationContainer>
         {hideSplashScreen ? (
           <drawer.Navigator initialRouteName="ServiciosGeneralScreen">
-            {/* <drawer.Screen
+            <drawer.Screen
               name="Inicio"
               component={InicioMenuScreen}
               
-            /> */}
+            />
             <drawer.Screen
               name="Historia"
               component={HistoriaScreen}
@@ -98,11 +98,11 @@ const App = () => {
               component={InicioScreen}
               
             />
-            <drawer.Screen
+            {/* <drawer.Screen
               name="Noticias Especificas"
               component={NoticiasEspecificasScreen}
               
-            />
+            /> */}
             <drawer.Screen
               name="Reportar Situacion"
               component={ReportarSituacionScreen}

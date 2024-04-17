@@ -1,15 +1,16 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, ScrollView, StyleSheet } from 'react-native';
 
 const HistoriaScreen = () => {
   return (
     <View style={styles.container}>
+      <ScrollView style={styles.scrollView}>
       <Image
         source={require("../assets/icon.png")}
         style={styles.image}
         resizeMode="contain"
-      />
-       <Text style={styles.text}>
+      />      
+       <Text style={styles.text}>       
         <Text style={styles.heading}>Historia de la Defensa Civil:</Text>
         {"\n\n"}
         La historia de la Defensa Civil de la República Dominicana se remonta a sus inicios en la década de 1960. Fue creada como respuesta a la necesidad de contar con un organismo especializado en la prevención y atención de desastres naturales y emergencias en el país. Su creación se enmarca en un contexto donde la República Dominicana, al igual que otras naciones del Caribe y América Latina, enfrentaba constantes amenazas por fenómenos como huracanes, terremotos, inundaciones y otros eventos catastróficos.
@@ -24,6 +25,7 @@ const HistoriaScreen = () => {
         {"\n\n"}
         Hoy en día, la Defensa Civil de la República Dominicana juega un papel crucial en la protección de la vida y los bienes de los dominicanos ante situaciones de emergencia. A través de la prevención, la preparación y la respuesta oportuna, continúa trabajando para garantizar la seguridad y el bienestar de la población en caso de desastres naturales y otras emergencias.
       </Text>
+      </ScrollView>
     </View>
   );
 };
@@ -46,6 +48,10 @@ const styles = StyleSheet.create({
     color: '#333',
     paddingHorizontal: 20,
     textAlign: 'center',
+  },
+  scrollView: {
+    flex: 1,
+    width: '100%',
   },
 });
 

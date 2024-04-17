@@ -9,7 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "^1.23.1",
+    "@react-native-async-storage/async-storage": "1.21.0",
     "@react-navigation/bottom-tabs": "^6.3.1",
     "@react-navigation/core": "^6.2.1",
     "@react-navigation/drawer": "^6.6.15",
@@ -21,7 +21,7 @@
     "@react-navigation/routers": "^6.1.0",
     "@react-navigation/stack": "^6.2.1",
     "axios": "^1.6.8",
-    "expo": "~50.0.14",
+    "expo": "~50.0.17",
     "expo-font": "~11.10.3",
     "expo-image": "~1.10.6",
     "expo-status-bar": "~1.11.1",
@@ -30,9 +30,9 @@
     "react-native-gesture-handler": "~2.14.0",
     "react-native-reanimated": "~3.6.2",
     "react-native-safe-area-context": "4.8.2",
-    "react-native-screens": "^3.14.1",
+    "react-native-screens": "~3.29.0",
     "react-native-sqlite-storage": "^6.0.1",
-    "react-native-webview": "^13.8.4",
+    "react-native-webview": "13.6.4",
     "react-native-youtube": "^2.0.2"
   },
   "devDependencies": {
